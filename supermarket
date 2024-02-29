@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <fstream>
+
+using namespace std;
+
+struct Produs{
+    string nume;
+    float  pret;
+    int    cantitate;
+    int    dataExpirare;
+
+    bool operator<(const auto& other)const{
+        if(dataExpirare != other.dataExpirare)
+            return dataExpirare > other.dataExpirare;
+        else if(cantitate != other.cantitate)
+            return cantitate > other.cantitate;
+        else if(pret != other.pret)
+            return pret > other.pret;
+        return nume > other.nume;
+    }
+
+};
+
+int main()
+{
+
+    int       numarProduseStoc;
+    cin >> numarProduseStoc;
+
+    vector<string> numeProduse;
+    priority_queue<Produs> detaliiProduse;
+    for(int i = 0; i<numarProduseStoc; i++){
+        Produs produs;
+        cin>>produs.nume>>produs.pret>>produs.cantitate>>produs.dataExpirare;
+        numeProduse.push_back(produs.nume);
+        detaliiProduse.push(produs);
+    }
+
+cout<<"----------------------"<<endl;
+    while(!detaliiProduse.empty()){
+
+       Produs produsulCurent = detaliiProduse.top();
+       cout<<produsulCurent.nume<<" "<<produsulCurent.pret<<" "<<produsulCurent.cantitate<<" "<<produsulCurent.dataExpirare<<endl;
+       detaliiProduse.pop();
+    }
+
+    return 0;
+}
