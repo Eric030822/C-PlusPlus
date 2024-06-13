@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<string> myvector;
+    string name[101];
+    int words;
+    cin >> words;
+    for(int i = 0; i < words; i++)
+        cin >> name[i];
+
+    for(int i = 0; i < words; i++)
+    {
+        if(find(myvector.begin(), myvector.end(), name[i]) == myvector.end())
+        {
+            myvector.push_back(name[i]);
+            cout << "OK" << endl;
+        }
+        else
+        {
+            int c = count(myvector.begin(), myvector.end(), name[i]);
+            myvector.push_back(name[i]);
+            cout << name[i] << c << endl;
+        }
+    }
+
+    return 0;
+}
+
+
+6       
+eric    OK
+alex    OK
+eric    eric1
+alex    alex1
+tata    OK
+eric    eric2
